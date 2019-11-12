@@ -9,6 +9,9 @@ Herzig et al.: "It's not a bug, it's a feature: how misclassification impacts bu
 
 An example of how to use this library is shown in the main.py.
 
+**IMPORTANT**: If you want to use the approach by Terdchanakul et al., you need to install the 
+ngweight project (https://github.com/iwnsew/ngweight).
+
 Currently implemented approaches (sorted by Date published)
 ----------------------------------------------------------
 
@@ -31,6 +34,9 @@ DOI: https://doi.org/10.1145/2723742.2723751
 Terdchanakul et al. (2017): "Bug or Not? Bug Report Classification Using N-Gram IDF". In: Proceedings of the 
 33th IEEE International Conference on Software Maintenance and Evolution
 DOI: https://doi.org/10.1109/ICSME.2017.14
+
+**IMPORTANT**: If you want to use the approach by Terdchanakul et al., you need to install the 
+ngweight project (https://github.com/iwnsew/ngweight).
 
 Pandey et al. (2018): "Automated Classification of Issue Reports from a Software Issue Tracker". In: 
 Progress in Intelligent Computing Techniques: Theory, Practice, and Applications.
