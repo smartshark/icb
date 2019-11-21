@@ -10,6 +10,7 @@ setup(
     description='Reimplementation of approaches for issue classification',
     install_requires=['scikit-learn', 'pandas','skift','numpy','nltk', 'keras', 'pycoshark', 'tensorflow',
     'skfeature @ http://github.com/smartshark/scikit-feature/tarball/master#egg=skfeature-1.0.0'],
+    dependency_links=['http://github.com/smartshark/scikit-feature/tarball/master#egg=skfeature-1.0.0'],
     author='ftrautsch',
     author_email='fabian.trautsch@informatik.uni-goettingen.de',
     url='https://github.com/smartshark/icb',
