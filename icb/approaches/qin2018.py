@@ -37,12 +37,13 @@ class Qin2018(BaseEstimator, ClassifierMixin):
 
     def fit(self, X, y):
         # First, we need to get our dictionary that maps all words that occur to numbers
-        raw_text = self.preprocess(' '.join(X.values))
-        i = 1
-        for word in raw_text.split(" "):
-            if word not in self.word_to_int.keys():
-                self.word_to_int[word] = i
-                i += 1
+        for issue in X.values:
+            raw_text = self.preprocess(issue)
+            i = 1
+            for word in raw_text.split(" "):
+                if word not in self.word_to_int.keys():
+                    self.word_to_int[word] = i
+                    i += 1
 
         # Second, we need to go through all issue reports and map their words to the numbers according to the dictionary
         data = []
