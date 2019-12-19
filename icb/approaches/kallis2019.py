@@ -1,3 +1,5 @@
+import numpy as np
+
 from skift import ColLblBasedFtClassifier
 from sklearn.base import BaseEstimator, ClassifierMixin
 
@@ -19,7 +21,7 @@ class Kallis2019(BaseEstimator, ClassifierMixin):
         return self
 
     def predict(self, X, y=None):
-        return self.sk_clf.predict(X)
+        return np.around(self.sk_clf.predict_proba(X)[:, 1], decimals=0)
 
     def filter(self, df):
         df['combined'] = df['title'] + " " + df['description']
