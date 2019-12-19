@@ -39,10 +39,11 @@ def create_data_frame_for_issue_data(issues):
         for comment in IssueComment.objects.filter(issue_id=issue.id).all():
             comment_string += comment.comment
         features.append(comment_string)
-
-        if issue.issue_type_verified == 'bug':
+        if issue.issue_type_verified and issue.issue_type_verified == 'bug':
             features.append(1)
-        else:
+        elif issue.issue_type_verified:
+            features.append(0)
+        elif issue.issue_type and issue.issue_type.lower()!='bug':
             features.append(0)
         data.append(features)
 
