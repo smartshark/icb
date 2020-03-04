@@ -17,16 +17,26 @@ class Chawla2015(BaseEstimator, ClassifierMixin):
     def fit(self, X, y=None):
         vect = CountVectorizer(stop_words='english')
         X = vect.fit_transform(X)
-
         df2 = pd.DataFrame(X.toarray())
         df2['classification'] = y
-
+        true_mask = df2['classification'] == 1
+        colsums = df2.sum()
+        colsums_true = df2.loc[true_mask].sum()
+        colsums_false = df2.loc[~true_mask].sum()
         self.term_memberships = {}
         for column, value in df2.iteritems():
             if column != 'classification':
+                #assert sum(df2.loc[df2['classification'] == 0].iloc[:, column]) == colsums_false.iat[column]
+                #assert sum(df2.loc[df2['classification'] == 1].iloc[:, column]) == colsums_true.iat[column]
+                #assert sum(df2.iloc[:, column]) == colsums.iat[column]
+                #print("foo7")
+                #self.term_memberships[vect.get_feature_names()[column]] = (
+                #    sum(df2.loc[df2['classification'] == 0].iloc[:, column]) / sum(df2.iloc[:, column]),
+                #    sum(df2.loc[df2['classification'] == 1].iloc[:, column]) / sum(df2.iloc[:, column])
+                #)
                 self.term_memberships[vect.get_feature_names()[column]] = (
-                    sum(df2.loc[df2['classification'] == 0].iloc[:, column]) / sum(df2.iloc[:, column]),
-                    sum(df2.loc[df2['classification'] == 1].iloc[:, column]) / sum(df2.iloc[:, column])
+                    colsums_false.iat[column] / colsums.iat[column],
+                    colsums_true.iat[column] / colsums.iat[column]
                 )
 
         return self
@@ -36,7 +46,11 @@ class Chawla2015(BaseEstimator, ClassifierMixin):
         for row in X:
             # Make use of the countvectorizer for all preprocessing steps
             vect = CountVectorizer(stop_words='english')
-            vect.fit_transform([row])
+            try:
+                vect.fit_transform([row])
+            except ValueError:
+                results.append(0)
+                continue
 
             # Get the issue reports membership score
             sum_non_bug = 1.0
