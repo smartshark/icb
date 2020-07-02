@@ -170,11 +170,10 @@ class Herbold2020_FastText_AutoTuned(BaseEstimator):
         df['description'] = df['description'].map(lambda x: remove_new_lines(x))
         return df[['title', 'description']]
 
-
-# Other variants we tried
-class Herbold2020_NoRules_FastText_AutoTuned(BaseEstimator):
+# single components for performance analysis
+class Herbold2020_Description(BaseEstimator):
     """
-    FastText with 90 seconds autotuning and without rules
+    FastText with 90 seconds autotuning and rules
     """
 
     def __init__(self, title_description_ratio=0.5):
@@ -182,6 +181,76 @@ class Herbold2020_NoRules_FastText_AutoTuned(BaseEstimator):
         self.threshold = 0.5
         self.cv_folds = 3
         self.autotune_duration = 90
+        self.text_clf = None
+        self.title_clf = None
+        self.npe_text_clf = None
+        self.npe_title_clf = None
+
+    def fit(self, X, y):
+        self.text_clf = cv_autotune_fasttext_fit(X, y, input_col_lbl='description',
+                                                 cv_folds=self.cv_folds, autotuneDuration=self.autotune_duration)
+
+        return self
+
+    def predict(self, X):
+        y_pred_proba = self.predict_proba(X)
+        y_pred = (y_pred_proba[:, 1] > self.threshold).astype(int)
+        return y_pred
+
+    def predict_proba(self, X):
+        return self.text_clf.predict_proba(X)
+
+    def filter(self, df):
+        df['title'] = df['title'].map(lambda x: remove_new_lines(x))
+        df['description'] = df['description'].map(lambda x: remove_new_lines(x))
+        return df[['title', 'description']]
+
+class Herbold2020_Title(BaseEstimator):
+    """
+    FastText with 90 seconds autotuning and rules
+    """
+
+    def __init__(self, title_description_ratio=0.5):
+        self.title_description_ratio = title_description_ratio
+        self.threshold = 0.5
+        self.cv_folds = 3
+        self.autotune_duration = 90
+        self.text_clf = None
+        self.title_clf = None
+        self.npe_text_clf = None
+        self.npe_title_clf = None
+
+    def fit(self, X, y):
+        self.title_clf = cv_autotune_fasttext_fit(X, y, input_col_lbl='title',
+                                                 cv_folds=self.cv_folds, autotuneDuration=self.autotune_duration)
+
+        return self
+
+    def predict(self, X):
+        y_pred_proba = self.predict_proba(X)
+        y_pred = (y_pred_proba[:, 1] > self.threshold).astype(int)
+        return y_pred
+
+    def predict_proba(self, X):
+        return self.title_clf.predict_proba(X)
+
+    def filter(self, df):
+        df['title'] = df['title'].map(lambda x: remove_new_lines(x))
+        df['description'] = df['description'].map(lambda x: remove_new_lines(x))
+        return df[['title', 'description']]
+
+
+# Other variants we tried
+class Herbold2020_NoRules_FastText_AutoTuned(BaseEstimator):
+    """
+    FastText with 90 seconds autotuning and without rules for NPEs
+    """
+
+    def __init__(self, title_description_ratio=0.5):
+        self.title_description_ratio = title_description_ratio
+        self.threshold = 0.5
+        self.cv_folds = 3
+        self.autotune_duration = 30
         self.text_clf = None
         self.title_clf = None
 
