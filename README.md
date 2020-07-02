@@ -53,7 +53,7 @@ DOI: https://doi.org/10.1145/3275219.3275239
 
 Kallis et al. (2019): "Ticket Tagger: Machine Learning Driven Issue Classification." In: 
 Proceedings of the 35th IEEE International Conference on Software Maintenance and Evolution
-DOI: (not yet assigned)
+DOI: https://doi.org/10.1109/ICSME.2019.00070
 
 Otoom et al. (2019): "Automated Classification of Software Bug Reports." In: Proceedings of the 9th International 
 Conference on Information Communication and Management.
