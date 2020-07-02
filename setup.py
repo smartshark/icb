@@ -10,7 +10,7 @@ setup(
     description='Reimplementation of approaches for issue classification',
     install_requires=[
         'fasttext @ https://github.com/facebookresearch/fastText/tree/master#egg-fasttext-0.10.0',
-        'scikit-learn', 'pandas','skift','numpy','nltk', 'keras', 'pycoshark', 'tensorflow',
+        'scikit-learn', 'pandas','skift','numpy','nltk', 'keras', 'pycoshark>=1.2.7', 'tensorflow',
                       'imbalanced-learn', 'psycopg2',
     'skfeature @ http://github.com/smartshark/scikit-feature/tarball/master#egg=skfeature-1.0.0'],
     dependency_links=['http://github.com/smartshark/scikit-feature/tarball/master#egg=skfeature-1.0.0',
