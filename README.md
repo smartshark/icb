@@ -38,6 +38,11 @@ DOI: https://doi.org/10.1109/ICSME.2017.14
 **IMPORTANT**: If you want to use the approach by Terdchanakul et al., you need to install the 
 ngweight project (https://github.com/iwnsew/ngweight).
 
+Palacio et al. (2018): "Learning to Identify Security-Related Issues Using
+Convolutional Neural Networks". In: Proceedings of the 2019 IEEE International Conference on Software Maintenance
+and Evolution (ICSME)
+DOI: 10.1109/ICSME.2019.00024
+
 Pandey et al. (2018): "Automated Classification of Issue Reports from a Software Issue Tracker". In: 
 Progress in Intelligent Computing Techniques: Theory, Practice, and Applications.
 DOI: https://doi.org/10.1007/978-981-10-3373-5_42
